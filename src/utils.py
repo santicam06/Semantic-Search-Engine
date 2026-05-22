@@ -72,7 +72,7 @@ def calculate_top_five(products: list, query: str, min_score: float) -> list:
       api_key=OPENROUTER_API_KEY
     )
 
-    # Model embedding call for query that exists
+    # Model embedding call for query
     params = {
         "model": "openai/text-embedding-3-small",
         # QUERY
@@ -114,7 +114,8 @@ def calculate_top_five(products: list, query: str, min_score: float) -> list:
 def search_products(
     query: str,
     products: List[Dict[str, Any]],
-    min_score: float = 0.3  
+    # Calculated by `src\threshold.py` 
+    min_score: float = 0.3   
 ) -> List[tuple]:
     
     try:

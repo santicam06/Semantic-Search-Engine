@@ -6,7 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-def calculate_top(products: list, query: str) -> list:
+def calculate_top_three(products: list, query: str) -> list:
 
     if not OPENROUTER_API_KEY:
             print("❌ Error: OPENROUTER_API_KEY not found")
@@ -46,7 +46,7 @@ def calculate_top(products: list, query: str) -> list:
     products_scores.sort(key=lambda x: x[0], reverse=True)
 
     # Print top 3 most similar products
-    print(f"📊TOP 3 FOR MOST SIMILAR PRODUCTS: [SCORE, NAME, ID]\n")
+    print(f"📊 TOP 3 FOR MOST SIMILAR PRODUCTS: [SCORE, NAME, ID]\n")
     i = 0
     scores_array = []
     while i < 3:
@@ -63,27 +63,32 @@ def get_threshold() -> float:
     try:
         products = load_database()
 
-        # Calculate top 3 of most similar products for a query:
-
+        
         # Product that exists probably
-        good_scores = calculate_top(products, "Elegant and wealthy watch")
-        # Product that does not exist 
-        bad_scores = calculate_top(products, "FIFA World Cup 2026 Album")
+        good_query = "Elegant and wealthy watch"
+        # Product that does not exist
+        bad_query = "FIFA World Cup 2026 Album"
+
+
+        # Calculate top 3 of most similar products for each query
+
+        print(f"\nGOOD TEST CASE TOP:\n🔎 QUERY: {good_query}\n")
+        good_scores = calculate_top_three(products, good_query)
+        print(f"\nBAD TEST CASE TOP:\n🔎 QUERY: {bad_query}\n")
+        bad_scores = calculate_top_three(products, bad_query)
 
         # Calculate averages of both top 3s
         good_average = sum(good_scores) / len(good_scores)
-        print(f"GOOD AVERAGE: {good_average}")
+        print(f"\nGOOD AVERAGE: {good_average}")
         bad_average = sum(bad_scores) / len(bad_scores)
         print(f"BAD AVERAGE: {bad_average}")
 
         # Calculate Threshold as the average of both previous averages
         MIN_SIMILARITY_SCORE = (good_average + bad_average) / 2
 
-        print(f"THE THRESHOLD IS: {MIN_SIMILARITY_SCORE}")
-
-        # THRESHOLD REGISTERED LAST TIME WAS:
-        # 0.37399521052323587
+        print(f"\nTHE THRESHOLD (MINIMUM SEMANTIC SCORE) IS: {MIN_SIMILARITY_SCORE}\n")
         
+        # For simplicity, just keep the first decimal point
         return round(MIN_SIMILARITY_SCORE, 1)
 
     except Exception as err:

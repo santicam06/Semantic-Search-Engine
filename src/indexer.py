@@ -51,9 +51,10 @@ def main_indexer():
             textembed = openai.embeddings.create(**params) 
             embeds_collector = []
 
+            # Collect each embedding vector (1 vector = 1 product)
             for item in textembed.data:
                 # Collect one line of dimensions (one line = one product)
-                embeds_collector.append('\t'.join(str(v) for v in item.embedding))
+                embeds_collector.append('\t'.join(str(dimension) for dimension in item.embedding))
 
             # Write embeddings to file according to format 
             vectors_path = os.path.join(DATA_DIR, "vectors.tsv")
