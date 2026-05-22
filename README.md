@@ -1,7 +1,7 @@
 # Semantic-Search-Engine
 
 LLM used in this application:
-- OpenAI Text Embedding 3 Small
+- [OpenAI Text Embedding 3 Small](https://openrouter.ai/openai/text-embedding-3-small)
 
 
 ## Setup Instructions
