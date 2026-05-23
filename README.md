@@ -4,7 +4,7 @@ LLM used in this application:
 - [OpenAI Text Embedding 3 Small](https://openrouter.ai/openai/text-embedding-3-small)
 
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
 Before running the application, follow these steps:
 
@@ -58,7 +58,7 @@ Always **copy** the template. Do not rename `.env.example` directly, as it shoul
         - `metadata.tsv`: Metadata used for embeddings visualization. 
 
 
-### Troubleshooting
+### 🚨 Troubleshooting
 - **Missing API Key**: Ensure `OPENROUTER_API_KEY` is correctly set in your `.env` file.
 - **Dependency Issues**: If running in a new environment, ensure you have executed the commands in **Step 3**.
 - **Virtual Environment Not Activated**: If you receive "module not found" errors, ensure your virtual environment is activated **(Step 3)**.
