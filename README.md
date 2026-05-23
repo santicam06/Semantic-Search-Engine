@@ -60,8 +60,9 @@ Always **copy** the template. Do not rename `.env.example` directly, as it shoul
 
 ### 🚨 Troubleshooting
 - **Missing API Key**: Ensure `OPENROUTER_API_KEY` is correctly set in your `.env` file.
-- **Dependency Issues**: If running in a new environment, ensure you have executed the commands in **Step 3**.
+- **Dependency Issues**: If running in a new environment, ensure you have executed the commands in **Step 3** onwards.
 - **Virtual Environment Not Activated**: If you receive "module not found" errors, ensure your virtual environment is activated **(Step 3)**.
+- **Persistent Environment Errors**: If you encounter any other unusual errors with your Python environment, manually delete the `.venv` folder and repeat the process starting from **Step 3**.
 
 
 ---
