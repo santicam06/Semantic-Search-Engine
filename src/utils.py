@@ -46,13 +46,13 @@ def load_database():
     with open(vectors_path, 'r', encoding='utf-8') as f:
         vectors_data = f.read()
         # Array, each line is the vector of a specific product 
-        lines = vectors_data.strip().split('\n')
+        vector_lines = vectors_data.strip().split('\n')
 
     # 3. Attach vectors to products
     # Python's zip() function pairs the two lists automatically
     products_with_embeddings = []
 
-    for product, line in zip(products, lines):
+    for product, line in zip(products, vector_lines):
         # Convert vector tab-separated values to a list of floats
         vector = [float(x) for x in line.split('\t')]
 
@@ -101,11 +101,15 @@ def calculate_top_five(products: list, query: str, min_score: float) -> list:
     products_scores.sort(key=lambda x: x[0], reverse=True)
 
     # Safe print of top scores (avoids IndexError if results < 5)
-    top_scores = [str(round(t[0], 4)) for t in products_scores[:5]]
-    print(f"🔍 Top scores found: {', '.join(top_scores)}")
+    top_raw_scores = [tup[0] for tup in products_scores[:5]]
+
+    # Use truncation instead of rounding to be honest about the threshold filter
+    # (e.g., 0.29996 becomes 0.2999 so it doesn't look like it should pass a 0.3 threshold)
+    truncated_display = [f"{int(v * 10000) / 10000:.4f}" for v in top_raw_scores]
+    print(f"🔍 Top scores before threshold filter: {', '.join(truncated_display)}")
 
     # Filter and remove products with insufficient score
-    products_scores = [t for t in products_scores if t[0] >= min_score]
+    products_scores = [tup for tup in products_scores if tup[0] >= min_score]
 
     # Array with top 5 product tuples  
     return products_scores[:5]

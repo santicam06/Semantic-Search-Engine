@@ -17,7 +17,10 @@ def main_indexer():
 
         # Initialize the file with JSON data
         products = response.json()
-        
+
+        if not products or not products.get("products"):
+            raise ValueError("No products found in the API response or response format is invalid.")
+
         # Ensure data directory exists
         os.makedirs(DATA_DIR, exist_ok=True)
         
@@ -72,14 +75,12 @@ def main_indexer():
             # HEADERS
             f.write("Title\tCategory\n")
 
-            for p in array_serials:
-                clean_p = p.replace('\t', ' ').replace('\n', ' ')
+            for product in products["products"]:
+                # Use original dictionary to get values per product
+                title = str(product.get("title", "-")).replace('\t', ' ').replace('\n', ' ')
+                categ = str(product.get("category", "-")).replace('\t', ' ').replace('\n', ' ')
 
-                # Get ONLY trimmed value of Title and Category of the product
-                title = clean_p.split('|')[0].replace("Title:", "").strip()
-                categ = clean_p.split('|')[1].replace("Category:", "").strip()
-
-                line = title + '\t' + categ
+                line = f"{title}\t{categ}"
                 f.write(line + '\n')
             
 
