@@ -65,9 +65,9 @@ Always **copy** the template. Do not rename `.env.example` directly, as it shoul
 
 
 ---
-## This application contains **two** main files: 
+## This application contains **two** main modules + an Extra tool 
 
-### `semantic_search.py` (end-users usage)
+### 1) `semantic_search.py` (end-users usage)
 The application asks for a product you are looking for and according to your search it displays Top 5 most similar products found (or less, if fewer products surpass the minimum similarity score threshold).
 
 Run command:
@@ -83,7 +83,7 @@ After each search, the application will ask **"DO YOU WANT TO EXIT? (YES/ NO)"**
 - **NO**: Returns you to the search prompt for another query.
 
 ---
-### `threshold.py` (engineering/analysis usage only) 
+### 2) `threshold.py` (engineering/analysis usage only) 
 Calculates the MINIMUM similarity score threshold that a product can have related to the user's query, in order to appear in the Top 5.
 
 Run command:
