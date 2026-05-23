@@ -75,10 +75,10 @@ Run command:
 # Windows
 python src\semantic_search.py
 # macOS/Linux
-python3 src\semantic_search.py
+python3 src/semantic_search.py
 ```
 
-After each search, the application will ask **"DO YOU WANT TO EXIT? (YES/ NO)"**:
+After each search, the application will ask **"DO YOU WANT TO EXIT? (YES/NO)"**:
 - **YES**: Terminates the program.
 - **NO**: Returns you to the search prompt for another query.
 
@@ -91,7 +91,7 @@ Run command:
 # Windows
 python src\threshold.py
 # macOS/Linux
-python3 src\threshold.py
+python3 src/threshold.py
 ```
 
 #### Script Functionality
@@ -144,3 +144,13 @@ If you are curious about the embeddings logic, you can follow these steps to gen
 - In the right-hand search bar, search for any **Title** or **Category** present in the `metadata.tsv` file. Notice how all the related products are clustered tightly together? The red spots nearby are the most 
 - Click on a spot. The redder the neighboring spots are, the more closely they are correlated. The yellow spots are still related but less so.
 - Look at the "Nearest points in the original space" list on the right. You should see other similar items. 
+
+
+## Final Step: Deactivate the Virtual Environment
+
+Once you are finished working with the application, you can deactivate the virtual environment to return to your global Python context:
+
+```sh
+# Terminal
+deactivate
+```

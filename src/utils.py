@@ -107,7 +107,7 @@ def calculate_top_five(products: list, query: str, min_score: float) -> list:
     # (e.g., 0.29996 becomes 0.2999 so it doesn't look like it should pass a 0.3 threshold)
     truncated_display = [f"{int(v * 10000) / 10000:.4f}" for v in top_raw_scores]
     print(f"🔍 Top scores before threshold filter: {', '.join(truncated_display)}")
-
+    print(f"🛑 Threshold is >= {min_score}")
     # Filter and remove products with insufficient score
     products_scores = [tup for tup in products_scores if tup[0] >= min_score]
 

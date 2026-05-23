@@ -23,7 +23,7 @@ def main():
         wants_search = True
 
         while wants_search:
-            query = input("\n🛍️  What product are you looking for?  >")
+            query = input("\n🛍️  What product are you looking for?  > ")
             matches = search_products(query, products)
 
             if len(matches) == 0:
