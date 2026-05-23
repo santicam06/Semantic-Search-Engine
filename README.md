@@ -30,14 +30,14 @@ From this point on, make sure that your present working directory on your termin
 
 4. **Install Dependencies**:
    - Upgrade `pip` and install required libraries:
-     ```powershell
+     ```sh
      python -m pip install --upgrade pip
      python -m pip install requests openai python-dotenv
      ```
 
 5. **Environment Configuration**:
    - Create a local `.env` file by copying the template file `.env.example`. This file contains the required API key for the application, read and set it carefully.
-```powershell
+```sh
      # Windows
      copy .env.example .env
      # macOS/Linux or PowerShell
