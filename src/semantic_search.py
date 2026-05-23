@@ -39,7 +39,7 @@ def main():
 
             repeat_command = True
             while repeat_command:
-                exit = input("\n\n DO YOU WANT TO EXIT? (YES/ NO) ")
+                exit = input("\n\n DO YOU WANT TO EXIT? (YES/NO) ")
                 if exit.lower() == "yes": 
                     wants_search = False 
                     repeat_command = False

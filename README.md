@@ -19,7 +19,7 @@ Before running the application, follow these steps:
 3. **Create and Activate a Virtual Environment**:
 
 >[!IMPORTANT]
-From this point on, make sure that your present working directory on your terminal is the root directory of the application: `./Semantic-Search-Engine`. 
+From this point on, make sure that your present working directory on your terminal is the root directory of the application: `.\Semantic-Search-Engine`. 
 
    - Create the environment:
      - **Windows**: `python -m venv .venv`
@@ -36,15 +36,23 @@ From this point on, make sure that your present working directory on your termin
      ```
 
 5. **Environment Configuration**:
-   - Open the `.env` file located at the root directory. This file contains the required API key for the application, read and set it carefully.
+   - Create a local `.env` file by copying the template file `.env.example`. This file contains the required API key for the application, read and set it carefully.
+```powershell
+     # Windows
+     copy .env.example .env
+     # macOS/Linux or PowerShell
+     cp .env.example .env
+   ```
+> [!IMPORTANT]
+Always **copy** the template. Do not rename `.env.example` directly, as it should remain in the repository as a reference for required environment variables.
 
 6. Directory Structure
-    - `src/`: Contains the source code.
+    - `src\`: Contains the source code.
         - `indexer.py`: Script to generate products data and embeddings.
         - `semantic_search.py`: **MAIN SCRIPT** for searching products.
         - `utils.py`: Shared utility functions for serialization, database loading, and similarity calculation.
         - `threshold.py`: Calculates minimum similarity score of potential products according to user search. 
-    - `data/`: Local storage for indexed data.
+    - `data\`: Local storage for indexed data.
         - `products.json`: Raw product data from the `DummyJSON` API.
         - `vectors.tsv`: Tab-separated embeddings for the products.
         - `metadata.tsv`: Metadata used for embeddings visualization. 
@@ -60,7 +68,7 @@ From this point on, make sure that your present working directory on your termin
 ## This application contains **two** main files: 
 
 ### `semantic_search.py` (end-users usage)
-The application asks for a product you are looking for and according to your query it displays a Top 5 (or less, if fewer products surpass the minimum threshold for similarity scores) of the most similar products found.
+The application asks for a product you are looking for and according to your search it displays Top 5 most similar products found (or less, if fewer products surpass the minimum similarity score threshold).
 
 Run command:
 ```powershell
@@ -70,7 +78,11 @@ python src\semantic_search.py
 python3 src\semantic_search.py
 ```
 
-### `threshold.py` (engineering analysis only) 
+After each search, the application will ask **"DO YOU WANT TO EXIT? (YES/ NO)"**:
+- **YES**: Terminates the program.
+- **NO**: Returns you to the search prompt for another query.
+
+### `threshold.py` (engineering/analysis usage only) 
 Calculates the MINIMUM similarity score threshold that a product can have related to the user's query, in order to appear in the Top 5.
 
 Run command:
@@ -83,10 +95,10 @@ python3 src\threshold.py
 
 #### Script Functionality
 This script uses two queries: 
-1) A good one which potentially will give desired products.
-2) A bad one which will try to fetch products as most similar as possible, but not giving exact ones as desired. 
+1) A good one which potentially will return desired products.
+2) A bad one which will try to fetch products as most similar as possible, but not returning exact ones as desired. 
 
-- Calculates the top three products, for both queries.  
+- Calculates the top three products, for each query.  
 - Calculates the average score in each top.
 - Calculates a Grand Mean; from both previous averages, equal to the threshold.
 
@@ -94,7 +106,7 @@ This script uses two queries:
 Currently, the threshold is set to be `0.3`, you can modify the queries in this script in order to see the variations.
 
 #### What is the similarity score of a product? 
-The similarity score is a floating-point number calculated by performing dot product between the **embedding dimensions** of the user's query with the ones from a single product that is being evaluated to be relevant or not.
+The similarity score is a floating-point number calculated by performing dot product between the **embedding dimensions** of the user's query with the ones from a single product that is being evaluated to be relevant or not for the query.
 
 The **highest** five product scores (i.e. the most semantically similar to the user's query) are selected for the Top 5.
 
@@ -114,3 +126,20 @@ Imagine we use only **2 dimensions** (instead of 1536) to represent products' em
 2. **Score for Product B:** `(0.8 * 0.1) + (0.1 * 0.8)` = **0.16** (Close to 0.0 and below threshold = Low Similarity)
 
 The engine recognizes that the "Smart phone" query is mathematically much closer to the "iPhone" than the "Chair".
+
+
+## Visualizing the embeddings space (optional tool for knowledge enrichment purposes)
+If you are curious about the embeddings logic, you can follow these steps to generate a 3D representation of all the products listed in this application and how do they visually group in an Embedding Space according to their semantic meaning.
+
+1. Open the [TensorFlow Embedding Projector](https://projector.tensorflow.org/).
+2. Click the **"Load"** button on the left sidebar.
+3. Upload your `data\vectors.tsv` file to the "Step 1: Load a TSV file of vectors" slot.
+4. Upload your `data\metadata.tsv` file to the "Step 2: Load a TSV file of metadata" slot.
+5. Click outside the modal to close it.
+
+**Explore your data:**
+
+- You should see a 3D cloud of points.
+- In the right-hand search bar, search for any **Title** or **Category** present in the `metadata.tsv` file. Notice how all the related products are clustered tightly together? The red spots closeby are the most 
+- Click on a spot. The redder the neighboring spots are, the more closely they are correlated. The yellow spots are still related but less so.
+- Look at the "Nearest points in the original space" list on the right. You should see other similar items. 
