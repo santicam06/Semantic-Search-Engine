@@ -19,14 +19,15 @@ def serialize_product(product: dict) -> str:
 
     title = product.get("title") or "-"
     category = product.get("category") or "-"
-    desc = product.get("desc") or "-"
+    description = product.get("description") or "-"
+
     tags = product.get("tags")
     brand = product.get("brand") or "-"
     
     # Join elements of tags array into a single string, if tags is not an array set default value    
     tags_str = ", ".join(tags) if isinstance(tags, list) else "-"
 
-    return f"Title: {title} | Category: {category} | Description: {desc} | Tags: {tags_str} | Brand: {brand}"
+    return f"Title: {title} | Category: {category} | Description: {description} | Tags: {tags_str} | Brand: {brand}"
 
 
 def dot_product(vec_a: list[float], vec_b: list[float]) -> float:
