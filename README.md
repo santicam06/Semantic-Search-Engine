@@ -68,7 +68,7 @@ Always **copy** the template. Do not rename `.env.example` directly, as it shoul
 ## This application contains **two** main modules + an Extra tool 
 
 ### 1) `semantic_search.py` (end-users usage)
-The application asks for a product you are looking for and according to your search it displays Top 5 most similar products found (or less, if fewer products surpass the minimum similarity score threshold).
+The application asks for a product you are looking for and according to your search it displays Top 5 most similar products found (or less, if fewer products surpass the minimum similarity score **threshold**).
 
 Run command:
 ```sh

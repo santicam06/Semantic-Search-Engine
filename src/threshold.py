@@ -79,9 +79,9 @@ def get_threshold() -> float:
 
         # Calculate averages of both top 3s
         good_average = sum(good_scores) / len(good_scores)
-        print(f"\nGOOD AVERAGE: {good_average}")
+        print(f"\nGOOD TEST AVERAGE: {good_average}")
         bad_average = sum(bad_scores) / len(bad_scores)
-        print(f"BAD AVERAGE: {bad_average}")
+        print(f"BAD TEST AVERAGE: {bad_average}")
 
         # Calculate Threshold as the average of both previous averages
         MIN_SIMILARITY_SCORE = (good_average + bad_average) / 2
