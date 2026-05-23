@@ -129,7 +129,7 @@ Imagine we use only **2 dimensions** (instead of 1536) to represent products' em
 The engine recognizes that the "Smart phone" query is mathematically much closer to the "iPhone" than the "Chair".
 
 
-## Visualizing the embeddings space (optional tool for knowledge enrichment purposes)
+## 🔎 Visualizing the embeddings space (optional tool for knowledge enrichment purposes)
 If you are curious about the embeddings logic, you can follow these steps to generate a 3D representation of all the products listed in this application and how do they visually group in an Embedding Space according to their semantic meaning.
 
 1. Open the [TensorFlow Embedding Projector](https://projector.tensorflow.org/).
