@@ -11,23 +11,35 @@ FILE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(FILE_DIR, "..", "data")
 
 
-# Combines the product's title, category, description, tags, and brand into a single line
+# Generates a descriptive natural language phrase for the product to improve LLM's semantic embedding accuracy
 def serialize_product(product: dict) -> str:
 
     if not product:
         raise ValueError('Product is a null object')
 
-    title = product.get("title") or "-"
-    category = product.get("category") or "-"
-    description = product.get("description") or "-"
-
+    title = product.get("title") or "Unknown Product"
+    category = product.get("category") or "General"
+    description = product.get("description") or "No description available."
     tags = product.get("tags")
-    brand = product.get("brand") or "-"
+    brand = product.get("brand") or "Generic"
+    price = product.get("price") or "0.00"
     
-    # Join elements of tags array into a single string, if tags is not an array set default value    
-    tags_str = ", ".join(tags) if isinstance(tags, list) else "-"
+    dims = product.get("dimensions") or {}
+    w = dims.get("width") or "0"
+    h = dims.get("height") or "0"
+    d = dims.get("depth") or "0"
+    
+    tags_str = ", ".join(tags) if isinstance(tags, list) else "none"
 
-    return f"Title: {title} | Category: {category} | Description: {description} | Tags: {tags_str} | Brand: {brand}"
+    
+    # Repeating the Brand and Category at the start gives them more semantic "weight" for the embedding vector,
+    # to force the model prioritize context over ambiguous titles (e.g. Apple [the fruit] vs Apple iPhone).
+    return (
+        f"Brand: {brand}. Category: {category}. "
+        f"This is a {brand} brand product titled '{title}' in the '{category}' department. "
+        f"Description: {description} It is tagged with: {tags_str}. "
+        f"Price: ${price}. Dimensions: {w}cm x {h}cm x {d}cm."
+    )
 
 
 def dot_product(vec_a: list[float], vec_b: list[float]) -> float:

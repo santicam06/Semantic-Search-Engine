@@ -33,6 +33,12 @@ def main_indexer():
         for product in products["products"]:
             array_serials.append(serialize_product(product))
 
+        # DEBUG: Print first 3 serialized strings to verify format
+        print("\n--- DEBUG: FIRST 3 SERIALIZED STRINGS ---")
+        for s in array_serials[:3]:
+            print(f"DEBUG: {s}\n")
+        print("------------------------------------------\n")
+
 
         # Model embedding call
         if not OPENROUTER_API_KEY:
