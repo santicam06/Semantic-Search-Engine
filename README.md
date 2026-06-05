@@ -1,6 +1,6 @@
 # Semantic-Search-Engine
 
-With a catalogue of 195+ products, this engine retrieves the most similar ones according to your query; by following the semantic similarity principle through embeddings. Search for cosmetics, accesories, furniture, sports apparel/tools, among others!
+With a catalogue of 195+ products, this engine retrieves the most similar ones according to your query; by following the semantic similarity principle through embeddings. **Search for cosmetics, accesories, furniture, sports apparel/tools, among others!**
 
 ## LLM used in this application:
 - [OpenAI Text Embedding 3 Small](https://openrouter.ai/openai/text-embedding-3-small)
