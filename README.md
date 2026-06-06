@@ -10,6 +10,9 @@ Before running the application, follow these steps:
 
 1. For this repository, create a **GitHub Codespace (Cloud)** OR clone it locally and open it with your preferred code editor (e.g. Visual Studio Code, ...).
 
+>[!IMPORTANT]
+From this point on, make sure that your present working directory on your terminal is the root directory of the application: `.\Semantic-Search-Engine`. 
+
 2. **Install Python** (If not already installed):
    - **Windows**: Download the latest installer from [python.org](https://www.python.org/downloads/windows/) or use: `winget install Python.Python.3.12`
    - **macOS**: Use Homebrew: `brew install python`
@@ -17,9 +20,6 @@ Before running the application, follow these steps:
    - **Cloud Workspaces (Codespaces, etc.)**: Python is usually pre-installed. Run `python3 --version` to verify and skip this step.
 
 3. **Create and Activate a Virtual Environment**:
-
->[!IMPORTANT]
-From this point on, make sure that your present working directory on your terminal is the root directory of the application: `.\Semantic-Search-Engine`. 
 
    - Create the environment:
      - **Windows**: `python -m venv .venv`
